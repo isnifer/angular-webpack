@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular & Webpack advanced integration</title>
+</head>
+<body>
+
+    <div ng-app="uo">
+        <div ng-controller="WebpackCtrl as self">
+            <div ng-click="self.changeName()">{{ self.controllerName }}</div>
+            <ul>
+                <li ng-repeat="item in self.items">
+                    {{ item.title }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div ng-app="zik" id="zik">
+        <div ng-controller="WebpackCtrl as self">
+            <div ng-click="self.changeName()">{{ self.controllerName }}</div>
+            <ul>
+                <li ng-repeat="item in self.items">
+                    {{ item.title }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.js"></script>
+    <script src="build.uo.js"></script>
+    <script src="build.zik.js"></script>
+
+    <script type="text/javascript">
+        angular.bootstrap(document.getElementById('zik'), ['zik']);
+    </script>
+</body>
+</html>
