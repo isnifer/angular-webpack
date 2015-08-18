@@ -15,10 +15,19 @@
                 </li>
             </ul>
         </div>
+
+        <div ng-controller="JetpackCtrl as self">
+            <div ng-click="self.changeName()">{{ self.controllerName }}</div>
+            <ul>
+                <li ng-repeat="item in self.items">
+                    {{ item.title }}
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div ng-app="zik" id="zik">
-        <div ng-controller="WebpackCtrl as self">
+        <div ng-controller="JetpackCtrl as self">
             <div ng-click="self.changeName()">{{ self.controllerName }}</div>
             <ul>
                 <li ng-repeat="item in self.items">

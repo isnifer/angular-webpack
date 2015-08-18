@@ -46,20 +46,131 @@
 
 	'use strict';
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var modules = ['jetpack', 'webpack'];
 
-	var _controller = __webpack_require__(1);
+	modules.forEach(function (e) {
+	    __webpack_require__(1)("./" + e + '/module.js');
+	});
 
-	var _controller2 = _interopRequireDefault(_controller);
-
-	var _service = __webpack_require__(2);
-
-	var _service2 = _interopRequireDefault(_service);
-
-	angular.module('uo', []).service('WebpackService', ['$http', _service2['default']]).controller('WebpackCtrl', ['WebpackService', _controller2['default']]);
+	angular.module('uo', modules);
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./jetpack/module.js": 2,
+		"./webpack/module.js": 5
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 1;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _controller = __webpack_require__(3);
+
+	var _controller2 = _interopRequireDefault(_controller);
+
+	var _service = __webpack_require__(4);
+
+	var _service2 = _interopRequireDefault(_service);
+
+	angular.module('jetpack', []).service('JetpackService', ['$http', _service2['default']]).controller('JetpackCtrl', ['JetpackService', _controller2['default']]);
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	exports['default'] = JetpackCtrl;
+
+	function JetpackCtrl(JetpackService) {
+	    var self = this;
+
+	    self.controllerName = 'Jetpack';
+
+	    self.changeName = function () {
+	        self.controllerName = JetpackService.changeName(self.controllerName);
+	    };
+
+	    JetpackService.get().then(function (response) {
+	        self.items = response.data;
+	    });
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	exports['default'] = JetpackService;
+
+	function JetpackService($http) {
+	    function changeName(name) {
+	        return name === 'Jetpack' ? 'Webpack' : 'Jetpack';
+	    }
+
+	    function get() {
+	        return $http.get('http://beta.json-generator.com/api/json/get/OH7O3dy').then(function (data) {
+	            return data;
+	        });
+	    }
+
+	    return {
+	        changeName: changeName,
+	        get: get
+	    };
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _controller = __webpack_require__(6);
+
+	var _controller2 = _interopRequireDefault(_controller);
+
+	var _service = __webpack_require__(7);
+
+	var _service2 = _interopRequireDefault(_service);
+
+	angular.module('webpack', []).service('WebpackService', ['$http', _service2['default']]).controller('WebpackCtrl', ['WebpackService', _controller2['default']]);
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -86,7 +197,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 2 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';

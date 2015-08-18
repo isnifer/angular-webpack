@@ -1,10 +1,11 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     context: __dirname,
     entry: {
-        uo: './uo.js',
-        zik: './zik.js'
+        uo: './uo/uo.js',
+        zik: './zik/zik.js'
     },
     output: {
         path: __dirname,

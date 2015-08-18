@@ -46,20 +46,62 @@
 
 	'use strict';
 
+	var modules = ['jetpack'];
+
+	modules.forEach(function (e) {
+	    __webpack_require__(8)("./" + e + '/module.js');
+	});
+
+	angular.module('zik', modules);
+
+/***/ },
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./jetpack/module.js": 9
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 8;
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _controller = __webpack_require__(1);
+	var _controller = __webpack_require__(10);
 
 	var _controller2 = _interopRequireDefault(_controller);
 
-	var _service = __webpack_require__(2);
+	var _service = __webpack_require__(11);
 
 	var _service2 = _interopRequireDefault(_service);
 
-	angular.module('zik', []).service('WebpackService', ['$http', _service2['default']]).controller('WebpackCtrl', ['WebpackService', _controller2['default']]);
+	angular.module('jetpack', []).service('JetpackService', ['$http', _service2['default']]).controller('JetpackCtrl', ['JetpackService', _controller2['default']]);
 
 /***/ },
-/* 1 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -67,18 +109,18 @@
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-	exports['default'] = WebpackCtrl;
+	exports['default'] = JetpackCtrl;
 
-	function WebpackCtrl(WebpackService) {
+	function JetpackCtrl(JetpackService) {
 	    var self = this;
 
-	    self.controllerName = 'Webpack';
+	    self.controllerName = 'Jetpack';
 
 	    self.changeName = function () {
-	        self.controllerName = WebpackService.changeName(self.controllerName);
+	        self.controllerName = JetpackService.changeName(self.controllerName);
 	    };
 
-	    WebpackService.get().then(function (response) {
+	    JetpackService.get().then(function (response) {
 	        self.items = response.data;
 	    });
 	}
@@ -86,7 +128,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 2 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -94,9 +136,9 @@
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-	exports['default'] = WebpackService;
+	exports['default'] = JetpackService;
 
-	function WebpackService($http) {
+	function JetpackService($http) {
 	    function changeName(name) {
 	        return name === 'Jetpack' ? 'Webpack' : 'Jetpack';
 	    }
